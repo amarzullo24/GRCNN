@@ -14,7 +14,7 @@ class COCODataset(JointsDataset):
         super().__init__(cfg, stage, transform)
         self.cur_dir = cfg.DATA.DATASET_ROOT
 
-        self.train_gt_file = 'person_keypoints_train2017.json'
+        self.train_gt_file = 'person_keypoints_val2017.json'
         self.train_gt_path = os.path.join(self.cur_dir, 'annotations',
                                           self.train_gt_file)
 
@@ -54,7 +54,8 @@ class COCODataset(JointsDataset):
                     continue
 
                 img_name = coco.imgs[img_id]['file_name']
-                prefix = self.stage + '2017'
+                #prefix = self.stage + '2017'
+                prefix = 'val2017'
                 img_path = os.path.join(self.cur_dir, prefix, img_name)
 
                 bbox = np.array(ann['bbox'])
@@ -165,7 +166,8 @@ class COCODataset(JointsDataset):
 
 if __name__ == "__main__":
     from hpe_benchmark.config import cfg
+    cfg.DATA.DATASET_ROOT = "/content/gdrive/MyDrive/Surgical tools mask/code/coco"
     dataset = COCODataset(cfg, 'train')
     print(dataset.data_num)
-    print(dataset.data[0])
-    print(dataset.__getitem__(0))
+    #print(dataset.data[0])
+    #print(dataset.__getitem__(0))
