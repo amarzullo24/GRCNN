@@ -15,11 +15,6 @@ from hpe_benchmark.utils.comm import synchronize, get_rank
 from hpe_benchmark.utils.logger import setup_logger
 from hpe_benchmark.utils.miscellaneous import mkdir, save_config
 
-try:
-    from apex import amp
-except ImportError:
-    raise ImportError('Use APEX for multi-precision via apex.amp')
-
 
 def train(cfg, local_rank, distributed):
     model = build_model(cfg)
